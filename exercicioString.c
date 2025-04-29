@@ -1,10 +1,10 @@
-//Dado um texto, identificar cada palavra deste texto e verificar se È palÌndroma.
-//Uma palavra palÌndroma È aquela que apresenta a mesma grafia quando lida a partir
-//do inÌcio ou de tr·s para diante; exemplo: RIR, SOLOS, ASA, RALAR, AMA. O
-//programa deve utilizar uma funÁ„o booleana para verificar se uma palavra
-//identificada no texto È palÌndroma. A saÌda do programa deve ser uma tabela listando
-//as palavras identificadas e, para cada uma, a mensagem dizendo se È ou n„o
-//palÌndroma.
+//Dado um texto, identificar cada palavra deste texto e verificar se √© pal√≠ndroma.
+//Uma palavra pal√≠ndroma √© aquela que apresenta a mesma grafia quando lida a partir
+//do in√≠cio ou de tr√°s para diante; exemplo: RIR, SOLOS, ASA, RALAR, AMA. O
+//programa deve utilizar uma fun√ß√£o booleana para verificar se uma palavra
+//identificada no texto √© pal√≠ndroma. A sa√≠da do programa deve ser uma tabela listando
+//as palavras identificadas e, para cada uma, a mensagem dizendo se √© ou n√£o
+//pal√≠ndroma.
 
 #include <stdio.h>
 #include <string.h>
@@ -13,18 +13,14 @@
 
 int main(){
     char texto[TAMANHO] = {};
-    char textoInvertido[TAMANHO] = {};
     char palavra[TAMANHO] = {};
     char palavraInvertida[TAMANHO] = {};
     int contador, j = 0, flag = 0;
+    
     printf("Por favor, digite o texto: ");
     fgets(texto, sizeof(texto), stdin);
     contador = strlen(texto)-1;
 
-    for (int i = 0; i < TAMANHO; i++){
-        textoInvertido[i] = texto[contador];
-        contador = contador-1;
-    }
     texto[strlen(texto+1)] = ' ';
 
     for (int i = 0; i < TAMANHO; i++){
