@@ -17,11 +17,13 @@
 
 
 #include <stdio.h>
+#include <string.h>
 
 #define QUANT_FRUTAS 3
 
 float calculaPreco(int laranja, int maca, int limao);
 float calculaFrete(char area, int quantTotal);
+void imprimeResultado(float precoFrutas, float precoFrete);
 
 int main(){
     char fruteira[QUANT_FRUTAS][20] = {"laranja", "maca", "limao"};
@@ -39,8 +41,9 @@ int main(){
             printf("Por acaso voce esta tentando roubar frutas de nosso estoque?");
             return 1;
         }
-        else 
-            quantTotal = quantTotal+fruta;
+        else {
+            quantTotal += fruta;
+        }
         frutas[i] = fruta;
 
     }
@@ -52,8 +55,7 @@ int main(){
     printf("Area:");
     scanf("%c", &area);
 
-    preco = calculaPreco(frutas[0], frutas[1], frutas[2]);
-    printf("Total da compra: R$%.4f", preco);
+    imprimeResultado(calculaPreco(frutas[0], frutas[1], frutas[2]), calculaFrete(area, quantTotal));
 
     return 0;
 }
@@ -61,22 +63,32 @@ int main(){
 float calculaPreco(int laranja, int maca, int limao){
     float precoLaranja = 0, precoMaca = 0, precoLimao = 0, preco = 0;
 
-    precoLaranja = laranja * 3;
-    precoLaranja = precoLaranja + (precoLaranja*3)/100;
-    precoMaca = maca * 2;
-    precoMaca = precoMaca + (precoMaca*2)/100;
-    precoLimao = limao;
-    precoLimao = precoLimao + (precoLimao)/100;
+    precoLaranja = laranja * 3 * 1.02;
+    precoMaca = maca * 2 * 1.05;
+    precoLimao = limao * 1.03;
     preco = precoLaranja+precoMaca+precoLimao;
+    
     return preco;
 }
 
-float calculaFrete(char area,int quantTotal ){
+float calculaFrete(char area,int quantTotal){
+    int entregas = (quantTotal + 24) / 25, precoFrete;
     
-    
-
-
-
-
+    if (area == 'a' || area == 'A'){
+        precoFrete = 10*entregas;
+    }
+    else if (area == 'b' || area == 'B'){
+        precoFrete = 5*entregas;
+    }
+    else {
+        printf("\nErro, area nao informada corretamente");
+        return 0.0f;}
+    return precoFrete;
 }
 
+void imprimeResultado(float precoFruta, float precoFrete){
+    printf("\nResumo da compra:\n");
+    printf("Preco total da compra: R$%.4f\n", precoFruta);
+    printf("Preco total do frete: R$%.4f\n", precoFrete);
+    printf("Valor total da compra: R$%.4f\n", precoFruta+precoFrete);
+}
