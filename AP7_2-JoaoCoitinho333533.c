@@ -20,13 +20,15 @@
 
 #define QUANT_FRUTAS 3
 
-int calculaPreco(int laranja, int maca, int limao);
+float calculaPreco(int laranja, int maca, int limao);
+float calculaFrete(char area, int quantTotal);
 
 int main(){
     char fruteira[QUANT_FRUTAS][20] = {"laranja", "maca", "limao"};
     char endereco[100] = {};
     int frutas[QUANT_FRUTAS] = {};
-    int fruta = 0, preco = 0;
+    int fruta = 0, quantTotal = 0;
+    float preco = 0;
     char area;
     printf("Tabela de precos:\nLaranja: R$3,00 | 2%% imposto\nMaca: R$2,00 | 5%% imposto\nLimao: R$1,00 | 3%% imposto");
 
@@ -37,6 +39,8 @@ int main(){
             printf("Por acaso voce esta tentando roubar frutas de nosso estoque?");
             return 1;
         }
+        else 
+            quantTotal = quantTotal+fruta;
         frutas[i] = fruta;
 
     }
@@ -49,17 +53,30 @@ int main(){
     scanf("%c", &area);
 
     preco = calculaPreco(frutas[0], frutas[1], frutas[2]);
+    printf("Total da compra: R$%.4f", preco);
 
     return 0;
 }
 
-int calculaPreco(int laranja, int maca, int limao){
-    int preco = 0;
+float calculaPreco(int laranja, int maca, int limao){
+    float precoLaranja = 0, precoMaca = 0, precoLimao = 0, preco = 0;
 
-    preco = laranja * 3;
-    preco = preco + (preco*3)/100;
+    precoLaranja = laranja * 3;
+    precoLaranja = precoLaranja + (precoLaranja*3)/100;
+    precoMaca = maca * 2;
+    precoMaca = precoMaca + (precoMaca*2)/100;
+    precoLimao = limao;
+    precoLimao = precoLimao + (precoLimao)/100;
+    preco = precoLaranja+precoMaca+precoLimao;
+    return preco;
+}
+
+float calculaFrete(char area,int quantTotal ){
+    
+    
+
+
 
 
 }
-
 
