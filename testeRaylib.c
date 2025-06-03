@@ -16,20 +16,31 @@ void desenhaCampo(int matriz[TAMANHO_MATRIZ][TAMANHO_MATRIZ]);
 
 int main(void){
     srand(time(NULL));
-    InitWindow(LARGURA, ALTURA, "Movimento");//Inicializa janela, com certo tamanho e título
+    InitWindow(LARGURA, ALTURA, "Movimento");
     SetTargetFPS(60);
-    int posX = 400;
-    int posY = 400;
+    int posX = 798;
+    int posY = 798;
     int obstaculos[TAMANHO_MATRIZ][TAMANHO_MATRIZ] = {};
     preencheMatriz(obstaculos);
     while (!WindowShouldClose())
     {
-        if (IsKeyPressed(KEY_RIGHT)) posX += PASSO;
-        if (IsKeyPressed(KEY_LEFT)) posX -= PASSO;
-        if (IsKeyPressed(KEY_UP)) posY -= PASSO;
-        if (IsKeyPressed(KEY_DOWN)) posY += PASSO;
+        int novaPosX = posX;
+        int novaPosY = posY;
 
-        if (posX < 0 || posX >= LARGURA || posY < 0 || posY >= ALTURA) break;
+        if (IsKeyPressed(KEY_RIGHT)) novaPosX += PASSO;
+        if (IsKeyPressed(KEY_LEFT)) novaPosX -= PASSO;
+        if (IsKeyPressed(KEY_UP)) novaPosY -= PASSO;
+        if (IsKeyPressed(KEY_DOWN)) novaPosY += PASSO;
+
+        int novoI = novaPosY / TAMANHO_QUADRADO;
+        int novoJ = novaPosX / TAMANHO_QUADRADO;
+
+        if (obstaculos[novoI][novoJ] != 1){
+            posX = novaPosX;
+            posY = novaPosY;
+        }
+
+        if (novaPosX < 0 || novaPosX >= LARGURA || novaPosY < 0 || novaPosY >= ALTURA) break;
 
         BeginDrawing();
         ClearBackground(WHITE);
